@@ -11,7 +11,8 @@
     ],
     "types": [
       "@testing-library/jest-dom",
-      "vitest/globals"
+      "vitest/globals",
+      "@jose/dist/types"
     ],
     "module": "ESNext",
     "skipLibCheck": true,

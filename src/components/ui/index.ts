@@ -9,3 +9,5 @@ export * from './dropdown-menu';
 export * from './separator';
 export * from './sheet';
 export * from './dialog';
+export * from './skeleton';
+export * from './carousel';

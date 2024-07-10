@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SignJWT } from 'jose/dist/types/jwt/sign';
-import { jwtVerify } from 'jose/dist/types/jwt/verify';
+import { SignJWT } from 'jose';
+import { jwtVerify } from 'jose';
 
 import { getItem } from '@/lib/localStorage';
 import { AxiosRequestConfig } from 'axios';
-import { JWTPayload } from 'jose/dist/types/types';
+import { JWTPayload } from 'jose';
 
 const JWT_SECRET_KEY = 'test-secret-key';
 const jwtSecret = new TextEncoder().encode(JWT_SECRET_KEY);
@@ -13,12 +13,15 @@ export const wait = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 export const getStorageValue = (entity: string) =>
-  getItem(import.meta.env.VITE_BASE_URL)?.[entity];
+  getItem(import.meta.env.VITE_STORAGE_KEY)?.[entity];
 
 // Wrapper for axios mock adapter that adds authentication checks
 export const withAuth =
   (...data: any) =>
   async (config: AxiosRequestConfig) => {
+    if (import.meta.env.VITE_USE_AUTH === 'false') {
+      return typeof data[0] === 'function' ? data[0](config) : data;
+    }
     const token = config?.headers?.Authorization?.split(' ')[1];
 
     // Verifies access token if present

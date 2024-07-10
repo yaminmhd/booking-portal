@@ -1,8 +1,8 @@
-import { Listing } from '@/api/data/listings';
 import ListingCard from './ListingCard';
+import { ListingsWithLocation } from '@/pages/HomePage';
 
 type ListingListProps = {
-  listings: Listing[];
+  listings: ListingsWithLocation[];
 };
 
 const ListingList = ({ listings }: ListingListProps) => {
